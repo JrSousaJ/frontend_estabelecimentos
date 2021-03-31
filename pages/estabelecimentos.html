@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" type="image/png" href="../assets/images/favicon-16x16.png" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/estilos.css">
+	<script src="../assets/js/jquery-3.5.1.js"></script>
+	<script src="../assets/js/jquery.mask.js"></script>
+	<script src="../assets/js/estabelecimentos.js"></script>
+	<title>Estabelecimentos - FitCard</title>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+		<a href="#" class="d-flex align-items-start my-2 my-lg-0 me-lg-auto text-white text-decoration-none"></a>
+		<img src="../assets/images/fitcard-logo.png" width="80" height="60"></img>
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+			aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="categorias.html">Categorias</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="estabelecimentos.html">Estabelecimentos<span
+							class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<main role="main" class="container">
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="container">
+			<div class="card">
+				<div class="card-body">
+					<h2>Estabelecimentos</h2>
+					<button type="button" class="btn btn-success adicionar" data-toggle="modal"
+						data-target="#modalAdiconar"><i class="fas fa-plus plus"></i>Adicionar Estabelecimento</button>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Razão social</th>
+								<th scope="col">CNPJ</th>
+								<th scope="col">Ações</th>
+							</tr>
+						</thead>
+						<tbody class="estabelecimentos">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</main>
+	<div class="modal fade" id="modalAdiconar" tabindex="-1" role="dialog" aria-labelledby="modalAdiconar"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalAdiconar">Adicionar Estabelecimento</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form class="adicionarEstabelecimentos">
+						<div class="form-group">
+							<label for="razao_social">Razão Social</label>
+							<input type="text" class="form-control razao_social" id="razao_social" name="razao_social"
+								required>
+						</div>
+						<div class="form-group">
+							<label for="cnpj">CNPJ</label>
+							<input type="text" class="form-control cnpj" id="cnpj" name="cnpj" required>
+						</div>
+						<div class="form-group">
+							<label for="nome_fantasia">Nome Fantasia</label>
+							<input type="text" class="form-control nome_fantasia" id="nome_fantasia"
+								name="nome_fantasia">
+						</div>
+						<div class="form-group">
+							<label for="categoria">Categoria</label>
+							<select class="form-control categoriaAdicionar" name="categoria" id="categoria" required>
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="email">E-mail</label>
+							<input type="email" class="form-control email" id="email" name="email">
+						</div>
+						<div class="form-group">
+							<label for="endereco">Endereço</label>
+							<input type="text" class="form-control endereco" id="endereco" name="endereco">
+						</div>
+						<div class="form-group">
+							<label for="cidade">Cidade</label>
+							<input type="text" class="form-control cidade" id="cidade" name="cidade">
+						</div>
+						<div class="form-group">
+							<label for="estado">Estado</label>
+							<input type="text" class="form-control estado" id="estado" name="estado">
+						</div>
+						<div class="form-group">
+							<label for="telefone">Telefone</label>
+							<input type="text" class="form-control telefone" id="telefone" name="telefone">
+						</div>
+						<div class="form-group">
+							<label for="agencia">Agência</label>
+							<input type="text" class="form-control agencia" id="agencia" name="agencia">
+						</div>
+						<div class="form-group">
+							<label for="conta">Conta</label>
+							<input type="text" class="form-control conta" id="conta" name="conta">
+						</div>
+						<div class="form-group">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+							<input type="submit" class="btn btn-primary botaoAdiconar" value="Adicionar">
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modalAlterar" tabindex="-1" role="dialog" aria-labelledby="modalAlterar"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalAlterar">Alterar Estabelecimento</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form class="alterarEstabelecimentos">
+						<input type="hidden" class="idEstabelecimento" id="idEstabelecimento">
+						<div class="form-group">
+							<label for="razao_social">Razão Social</label>
+							<input type="text" class="form-control razao_social_alterar" id="razao_social"
+								name="razao_social" required>
+						</div>
+						<div class="form-group">
+							<label for="cnpj">CNPJ</label>
+							<input type="text" class="form-control cnpj_alterar" id="cnpj" name="cnpj" required>
+						</div>
+						<div class="form-group">
+							<label for="nome_fantasia">Nome Fantasia</label>
+							<input type="text" class="form-control nome_fantasia_alterar" id="nome_fantasia"
+								name="nome_fantasia">
+						</div>
+						<div class="form-group">
+							<label for="categoria">Categoria</label>
+							<select class="form-control categoriaAlterar" name="categoriaAlterar" id="categoriaAlterar"
+								required>
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="email">E-mail</label>
+							<input type="email" class="form-control email_alterar" id="email" name="email">
+						</div>
+						<div class="form-group">
+							<label for="endereco">Endereço</label>
+							<input type="text" class="form-control endereco_alterar" id="endereco" name="endereco">
+						</div>
+						<div class="form-group">
+							<label for="cidade">Cidade</label>
+							<input type="text" class="form-control cidade_alterar" id="cidade" name="cidade">
+						</div>
+						<div class="form-group">
+							<label for="estado">Estado</label>
+							<input type="text" class="form-control estado_alterar" id="estado" name="estado">
+						</div>
+						<div class="form-group">
+							<label for="telefone">Telefone</label>
+							<input type="text" class="form-control telefone_alterar" id="telefone" name="telefone">
+						</div>
+						<div class="form-group">
+							<label for="agencia">Agência</label>
+							<input type="text" class="form-control agencia_alterar" id="agencia" name="agencia">
+						</div>
+						<div class="form-group">
+							<label for="conta">Conta</label>
+							<input type="text" class="form-control conta_alterar" id="conta" name="conta">
+						</div>
+						<div class="form-group">
+							<label for="status">Status</label>
+							<select class="form-control status" name="status" id="status">
+								<option value=""></option>
+								<option value="0">Inativo</option>
+								<option value="1">Ativo</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+							<input type="submit" class="btn btn-primary botaoAlterar" value="Alterar">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modalVisualizar" tabindex="-1" role="dialog" aria-labelledby="modalVisualizar"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalVisualizar">Visualizar Estabelecimento</h5>
+					<button type="button" class="close fecharVisualizacao" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body visualizarModal container">
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-danger fecharVisualizacao" data-dismiss="modal" value="Fechar">
+				</div>
+					
+			</div>
+		</div>
+	</div>
+</body>
+<script src="http://jqueryvalidation.org/files/dist/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/e9b1fd8560.js" crossorigin="anonymous"></script>
+
+</html>
