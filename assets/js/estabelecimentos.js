@@ -64,7 +64,10 @@ $(document).ready(function () {
     });
     $('.fecharVisualizacao').click(function() {
         $('.visualizarModal').empty();
+    
+
     });
+    $('.alert_card').hide();
 });
 
 function carregarEstabelecimentos() {
@@ -94,8 +97,8 @@ function carregarEstabelecimentos() {
             }
         },
         error: function (error) {
-            $(".message").html("falha ao carregar informações.");
-            $(".message_card").show();
+            $(".mensagem").html("Falha ao carregar as informações.");
+            $(".alert_card").show();
         },
     });
 }
@@ -134,8 +137,17 @@ function visualizarEstabelecimento(id)
             $('#modalVisualizar').modal('show');
         },
         error: function (error) {
-            $(".message").html("falha ao carregar informações.");
-            $(".message_card").show();
+            const listaErros = error.responseJSON.error.nome;
+            let erros = '<strong>Não foi possível inserir!</strong><br>';
+            for(let i = 0; i<listaErros.length; i++)
+            {
+                erros+=
+                `
+                    ${listaErros[i]}<br>
+                `;
+            }
+            $(".mensagem").html(erros);
+            $(".alert_card").show();
         },
     }); 
 }
@@ -163,7 +175,7 @@ function adicionarEstabelecimento()
         data: body,
         async: true,
         success: function (estabelecimento) {
-            $("#modalAdiconar").modal('toggle');
+            $("#modalAdiconar").modal('hide');
             $('.razao_social').val('');
             $('.cnpj').val('');
             $('.nome_fantasia').val('');
@@ -175,11 +187,21 @@ function adicionarEstabelecimento()
             $('.agencia').val('');
             $('.conta').val('');
                 
-            carregarEstabelecimentos();
+            location.reload();
         },
         error: function (error) {
-            $(".message").html("falha ao carregar informações.");
-            $(".message_card").show();
+            const listaErros = Object.values(error.responseJSON.error);
+            let erros = '<strong>Não foi possível inserir!</strong><br>';
+            for(let i = 0; i<listaErros.length; i++)
+            {
+                erros+=
+                `
+                    ${listaErros[i]}<br>
+                `;
+            }
+            $("#modalAdiconar").modal('hide');
+            $(".mensagem").html(erros);
+            $(".alert_card").show();
         },
     });
 }
@@ -209,8 +231,8 @@ function alterarEstabelecimentoModal(id)
             }
         },
         error: function (error) {
-            $(".message").html("falha ao carregar informações.");
-            $(".message_card").show();
+            $(".mensagem").html('Errro ao alterar');
+            $(".alert_card").show();
         },
     });
 
@@ -237,8 +259,9 @@ function alterarEstabelecimentoModal(id)
             $('#modalAlterar').modal('show');
         },
         error: function (error) {
-            $(".message").html("falha ao carregar informações.");
-            $(".message_card").show();
+            const listaErros = error.responseJSON.error.nome;
+            $(".mensagem").html('Erro ao alterar!');
+            $(".alert_card").show();
         },
     }); 
     
@@ -281,8 +304,19 @@ function alterarEstabelecimento()
             location.reload();
         },
         error: function (error) {
-            $(".message").html("falha ao carregar informações.");
-            $(".message_card").show();
+            const listaErros = Object.values(error.responseJSON.error);
+            console.log(listaErros)
+            let erros = '<strong>Não foi possível alterar!</strong><br>';
+            for(let i = 0; i<listaErros.length; i++)
+            {
+                erros+=
+                `
+                    ${listaErros[i]}<br>
+                `;
+            }
+            $("#modalAlterar").modal('hide');
+            $(".mensagem").html(erros);
+            $(".alert_card").show();
         },
     });
 }
@@ -299,11 +333,20 @@ function excluirEstabelecimento(id)
             data: body,
             async: true,
             success: function (estabelecimento) {
-                carregarEstabelecimentos();
+                location.reload();
             },
             error: function (error) {
-                $(".message").html("falha ao carregar informações.");
-                $(".message_card").show();
+                const listaErros = error.responseJSON.error.nome;
+                let erros = '<strong>Não foi possível excluir!</strong><br>';
+                for(let i = 0; i<listaErros.length; i++)
+                {
+                    erros+=
+                    `
+                        ${listaErros[i]}<br>
+                    `;
+                }
+                $(".mensagem").html(erros);
+                $(".alert_card").show();
             },
         });
     }

@@ -1,5 +1,6 @@
 $(document).ready(function () {
     carregarCategorias();
+    $('.alert_card').hide();
 });
 function carregarCategorias() {
     $.ajax({
@@ -27,8 +28,8 @@ function carregarCategorias() {
             }
         },
         error: function (error) {
-            $(".message").html("falha ao carregar informações.");
-            $(".message_card").show();
+            $(".mensagem").html("Falha ao carregar as informações.");
+            $(".alert_card").show();
         },
     });
 }
@@ -38,6 +39,8 @@ function adicionarCategoria()
     const body = {
         nome : nomeCategoria,
     };
+
+    $(".erros").remove();
     $.ajax({
         url: "http://localhost:800/public/api/categoria/salvarCategoria",
         type: "POST",
@@ -45,11 +48,21 @@ function adicionarCategoria()
         async: true,
         success: function (categorias) {
             $("#modalAdiconar").hide();
-            carregarCategorias();
+            $('.nome').val('');
+            location.reload();
         },
         error: function (error) {
-            $(".message").html("falha ao carregar informações.");
-            $(".message_card").show();
+            const listaErros = error.responseJSON.error.nome;
+            let erros = '<strong>Não foi possível inserir!</strong><br>';
+            for(let i = 0; i<listaErros.length; i++)
+            {
+                erros+=
+                `
+                    ${listaErros[i]}<br>
+                `;
+            }
+            $(".mensagem").html(erros);
+            $(".alert_card").show();
         },
     });
 }
@@ -70,8 +83,17 @@ function alterarCategoriaModal(id)
             $('#modalAlterar').modal('show');
         },
         error: function (error) {
-            $(".message").html("falha ao carregar informações.");
-            $(".message_card").show();
+            const listaErros = error.responseJSON.error.nome;
+            let erros = '<strong>Não foi carregar!</strong><br>';
+            for(let i = 0; i<listaErros.length; i++)
+            {
+                erros+=
+                `
+                    ${listaErros[i]}<br>
+                `;
+            }
+            $(".mensagem").html(erros);
+            $(".alert_card").show();
         },
     });
 }
@@ -90,8 +112,17 @@ function alterarCategoria()
             location.reload();
         },
         error: function (error) {
-            $(".message").html("falha ao carregar informações.");
-            $(".message_card").show();
+            const listaErros = error.responseJSON.error.nome;
+            let erros = '<strong>Não foi possível alterar!</strong><br>';
+            for(let i = 0; i<listaErros.length; i++)
+            {
+                erros+=
+                `
+                    ${listaErros[i]}<br>
+                `;
+            }
+            $(".mensagem").html(erros);
+            $(".alert_card").show();
         },
     });
 }
@@ -108,11 +139,20 @@ function excluirCategoria(id)
             data: body,
             async: true,
             success: function (categoria) {
-                carregarCategorias();
+                location.reload();
             },
             error: function (error) {
-                $(".message").html("falha ao carregar informações.");
-                $(".message_card").show();
+                const listaErros = error.responseJSON.error.nome;
+            let erros = '<strong>Não foi possível excluir!</strong><br>';
+            for(let i = 0; i<listaErros.length; i++)
+            {
+                erros+=
+                `
+                    ${listaErros[i]}<br>
+                `;
+            }
+            $(".mensagem").html(erros);
+            $(".alert_card").show();
             },
         });
     }
